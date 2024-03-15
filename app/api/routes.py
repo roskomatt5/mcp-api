@@ -11,11 +11,12 @@ def create_project(current_user_token):
     title = request.json['title']
     link = request.json['link']
     repo_link = request.json['repo_link']
+    date_created = request.json['date_created']
     user_token = current_user_token.token
 
     print(f'BIG TESTER: {current_user_token.token}')
 
-    project = Portfolio(title,link,repo_link,user_token=user_token) 
+    project = Portfolio(title,link,repo_link,date_created,user_token=user_token) 
     
     db.session.add(project)
     db.session.commit()
@@ -48,6 +49,7 @@ def update_file(current_user_token, id):
     project.title = request.json['title']
     project.link = request.json['link']
     project.repo_link = request.json['repo_link']
+    project.date_created = request.json['date_created']
     project.user_token = current_user_token.token
 
     db.session.commit()
@@ -56,7 +58,7 @@ def update_file(current_user_token, id):
 
 @api.route('/files/<id>', methods = ['DELETE'])
 @token_required
-def Portfolio(current_user_token, id):
+def delete_file(current_user_token, id):
     project = Portfolio.query.get(id)
     db.session.delete(project)
     db.session.commit()
@@ -113,7 +115,7 @@ def update_resume(current_user_token, id):
 
 @api.route('/resumes/<id>', methods = ['DELETE'])
 @token_required
-def Resume(current_user_token, id):
+def delete_resume(current_user_token, id):
     resume = Resume.query.get(id)
     db.session.delete(resume)
     db.session.commit()
