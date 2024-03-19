@@ -56,7 +56,7 @@ def update_file(current_user_token, id):
     response = project_schema.dump(project)
     return jsonify(response)
 
-@api.route('/files/<id>', methods = ['DELETE'])
+@api.route('/projects/<id>', methods = ['DELETE'])
 @token_required
 def delete_file(current_user_token, id):
     project = Portfolio.query.get(id)
