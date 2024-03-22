@@ -5,23 +5,24 @@ from models import db, User, Portfolio, Resume, project_schema, projects_schema,
 api = Blueprint('api',__name__, url_prefix='/api')
 
 
-@api.route('/projects', methods = ['POST'])
+@api.route('/projects', methods=['POST'])
 @token_required
 def create_project(current_user_token):
     title = request.json['title']
     link = request.json['link']
     repo_link = request.json['repo_link']
-    date_created = request.json['date_created']
     user_token = current_user_token.token
 
-    print(f'BIG TESTER: {current_user_token.token}')
+    project = Portfolio(title, link, repo_link, user_token=user_token)
 
-    project = Portfolio(title,link,repo_link,date_created,user_token=user_token) 
-    
     db.session.add(project)
     db.session.commit()
-
-    response = project_schema.dump(project)
+    response = {
+        'title': project.title,
+        'link': project.link,
+        'repo_link': project.repo_link,
+        'date_created': project.date_created
+    }
     return jsonify(response)
 
 
