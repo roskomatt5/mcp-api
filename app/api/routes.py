@@ -13,7 +13,7 @@ def create_project(current_user_token):
     repo_link = request.json['repo_link']
     user_token = current_user_token.token
 
-    project = Portfolio(title, link, repo_link, user_token=user_token,date_created=current_timestamp)
+    project = Portfolio(title, link, repo_link, user_token=user_token,date_created=datetime.utcnow())
 
     db.session.add(project)
     db.session.commit()
