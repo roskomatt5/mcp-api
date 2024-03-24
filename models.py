@@ -92,11 +92,11 @@ class Resume(db.Model):
 
 class ProjectSchema(ma.Schema):
     class Meta:
-        fields = ['id', 'title','link','repo_link','date_created']
+        fields = ['title','link','repo_link','date_created','id']
 
 class ResumeSchema(ma.Schema):
     class Meta:
-        fields = ['id', 'filename','file_path','uploaded_at']
+        fields = ['filename','file_path','uploaded_at','id']
 
 project_schema = ProjectSchema()
 projects_schema = ProjectSchema(many=True)
