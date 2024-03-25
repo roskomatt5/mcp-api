@@ -71,14 +71,16 @@ class Portfolio(db.Model):
 class Resume(db.Model):
     id = db.Column(db.String, primary_key=True)
     filename = db.Column(db.String(255), nullable=False)
-    file_path = db.Column(db.String(255), nullable=False)
+    size = db.Column(db.Integer, nullable=False)
+    type = db.Column(db.String(255), nullable=False)
     uploaded_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user_token = db.Column(db.String, db.ForeignKey('user.token'), nullable=False)
 
-    def __init__(self, filename, file_path, uploaded_at, user_token, id=''):
+    def __init__(self, filename, size, type, uploaded_at, user_token, id=''):
         self.id = self.set_id()
         self.filename = filename
-        self.file_path = file_path
+        self.size = size
+        self.type = type
         self.uploaded_at = uploaded_at
         self.user_token = user_token
 
@@ -96,7 +98,7 @@ class ProjectSchema(ma.Schema):
 
 class ResumeSchema(ma.Schema):
     class Meta:
-        fields = ['filename','file_path','uploaded_at','id']
+        fields = ['filename','size','type','uploaded_at','id']
 
 project_schema = ProjectSchema()
 projects_schema = ProjectSchema(many=True)
