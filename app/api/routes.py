@@ -69,14 +69,15 @@ def delete_file(current_user_token, id):
 @api.route('/resumes', methods = ['POST'])
 @token_required
 def create_resume(current_user_token):
-    filename = request.json['filename']
-    file_path = request.json['file_path']
+    name = request.json['name']
+    type = request.json['type']
+    size = request.json['size']
     uploaded_at = request.json['uploaded_at']
     user_token = current_user_token.token
 
     print(f'BIG TESTER: {current_user_token.token}')
 
-    resume = Resume(filename,file_path,uploaded_at,user_token=user_token) 
+    resume = Resume(filename,type,size,uploaded_at,user_token=user_token) 
     
     db.session.add(resume)
     db.session.commit()
@@ -104,8 +105,9 @@ def get_single_resume(current_user_token, id):
 @token_required
 def update_resume(current_user_token, id):
     resume = Resume.query.get(id)
-    resume.filename = request.json['filename']
-    resume.file_path = request.json['file_path']
+    resume.name = request.json['name']
+    resume.type = request.json['type']
+    resume.size = request.json['size']
     resume.uploaded_at = request.json['uploaded_at']
     resume.user_token = current_user_token.token
 
