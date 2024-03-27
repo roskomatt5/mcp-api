@@ -77,7 +77,7 @@ def create_resume(current_user_token):
 
     print(f'BIG TESTER: {current_user_token.token}')
 
-    resume = Resume(name,type,size,uploaded_at,user_token=user_token) 
+    resume = Resume(filename,type,size,uploaded_at,user_token=user_token) 
     
     db.session.add(resume)
     db.session.commit()
