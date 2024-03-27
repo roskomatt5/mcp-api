@@ -98,7 +98,7 @@ class ProjectSchema(ma.Schema):
 
 class ResumeSchema(ma.Schema):
     class Meta:
-        fields = ['name','size','type','uploaded_at','id']
+        fields = ['name','type','size','uploaded_at','id']
 
 project_schema = ProjectSchema()
 projects_schema = ProjectSchema(many=True)
