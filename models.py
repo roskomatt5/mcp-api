@@ -106,3 +106,13 @@ projects_schema = ProjectSchema(many=True)
 resume_schema = ResumeSchema()
 resumes_schema = ResumeSchema(many=True)
 
+
+
+
+
+
+
+
+
+
+
