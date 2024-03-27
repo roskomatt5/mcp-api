@@ -71,8 +71,8 @@ class Portfolio(db.Model):
 class Resume(db.Model):
     id = db.Column(db.String, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
-    size = db.Column(db.Integer, nullable=False)
-    type = db.Column(db.String(255), nullable=False)
+    size = db.Column(db.Integer,nullable=True)
+    type = db.Column(db.String(255),nullable=True)
     uploaded_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user_token = db.Column(db.String, db.ForeignKey('user.token'), nullable=False)
 
@@ -98,7 +98,7 @@ class ProjectSchema(ma.Schema):
 
 class ResumeSchema(ma.Schema):
     class Meta:
-        fields = ['name','type','size','uploaded_at','id']
+        fields = ['name','size','type','uploaded_at','id']
 
 project_schema = ProjectSchema()
 projects_schema = ProjectSchema(many=True)
