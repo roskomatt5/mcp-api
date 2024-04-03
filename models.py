@@ -73,14 +73,16 @@ class Resume(db.Model):
     name = db.Column(db.String(255), nullable=False)
     size = db.Column(db.Integer,nullable=True)
     type = db.Column(db.String(255),nullable=True)
+    uri = db.Column(db.String(255),nullable=True)
     uploaded_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user_token = db.Column(db.String, db.ForeignKey('user.token'), nullable=False)
 
-    def __init__(self, name, size, type, uploaded_at, user_token, id=''):
+    def __init__(self, name, size, type, uri, uploaded_at, user_token,id=''):
         self.id = self.set_id()
         self.name = name
         self.size = size
         self.type = type
+        self.uri = uri
         self.uploaded_at = uploaded_at
         self.user_token = user_token
 
@@ -98,7 +100,7 @@ class ProjectSchema(ma.Schema):
 
 class ResumeSchema(ma.Schema):
     class Meta:
-        fields = ['name','size','type','uploaded_at','id']
+        fields = ['name','size','type','uri','uploaded_at','id']
 
 project_schema = ProjectSchema()
 projects_schema = ProjectSchema(many=True)
