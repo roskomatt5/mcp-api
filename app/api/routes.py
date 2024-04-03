@@ -72,12 +72,13 @@ def create_resume(current_user_token):
     name = request.json['name']
     type = request.json['type']
     size = request.json['size']
+    uri = request.json['uri']
     uploaded_at = request.json['uploaded_at']
     user_token = current_user_token.token
 
     print(f'BIG TESTER: {current_user_token.token}')
 
-    resume = Resume(name,type,size,uploaded_at,user_token=user_token) 
+    resume = Resume(name,type,size,uri,uploaded_at,user_token=user_token) 
     
     db.session.add(resume)
     db.session.commit()
